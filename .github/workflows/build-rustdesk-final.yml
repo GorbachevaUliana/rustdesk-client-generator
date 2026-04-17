@@ -1,5 +1,4 @@
 name: Build RustDesk Client (Final v3)
-
 on:
   workflow_dispatch:
     inputs:
@@ -40,21 +39,17 @@ on:
         required: false
         type: boolean
         default: false
-
 env:
   RUST_VERSION: 1.75
   LLVM_VERSION: 15.0
   VCPKG_COMMIT_ID: 6f29f12e82a8293156836ad81cc9bf5af41fe836
-
 jobs:
   build-windows:
     name: Build RustDesk for Windows
     runs-on: windows-2022
-    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
     - name: Checkout RustDesk
       uses: actions/checkout@v4
       with:
@@ -62,12 +57,10 @@ jobs:
         ref: ${{ inputs.rustdesk_branch }}
         submodules: recursive
         path: rustdesk
-        
     - name: Install LLVM and Clang
       uses: KyleMayes/install-llvm-action@v1
       with:
         version: ${{ env.LLVM_VERSION }}
-        
     - name: Install Rust toolchain
       uses: dtolnay/rust-toolchain@v1
       with:
